@@ -94,7 +94,7 @@ setContent {
 M3 工作应保持为上游之上的**薄层**，避免长期分叉。仓库包含：
 
 - `scripts/sync-upstream.ps1` / `scripts/sync-upstream.sh`：拉取 `qiin2333/moonlight-vplus` 的 `master`，在 `automation/upstream-sync` 分支上合并，并运行 token 检查。
-- `.github/workflows/upstream-sync.yml`：每天定时执行同步；干净合并时自动创建 PR 到 `m3-redesign`；冲突时 job 失败并提示人工处理。
+- `.github/workflows/upstream-sync.yml`：每天定时执行同步；干净合并时更新 `automation/upstream-sync` 分支并尝试创建/更新 PR。若 fork 的 Actions token 不允许新建 PR，会输出 compare 链接；已经存在的同步 PR 会自动跟随分支更新。冲突时 job 失败并提示人工处理。
 
 > GitHub 只会从仓库**默认分支**注册定时/手动 workflow。首次启用时，把该 workflow 文件放到默认分支（例如合并一次到 `master`），或把 `m3-redesign` 设为默认分支；workflow 本身会 checkout `m3-redesign` 进行合并。
 

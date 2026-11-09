@@ -82,7 +82,7 @@ setContent {
 Keep the redesign a **thin layer** over upstream:
 
 - `scripts/sync-upstream.ps1` / `.sh` fetch `qiin2333/moonlight-vplus` `master`, merge into `automation/upstream-sync`, and run the token check.
-- `.github/workflows/upstream-sync.yml` runs daily, opens a PR on a clean merge, and fails loudly on conflicts.
+- `.github/workflows/upstream-sync.yml` runs daily, updates `automation/upstream-sync`, and tries to create/update the PR. If the fork's Actions token cannot create PRs, it prints a compare link; an existing sync PR still follows the branch automatically. Conflicts fail the job loudly.
 
 > GitHub only registers scheduled/manual workflows from the repository's **default branch**. To enable it, place this workflow on the default branch once (for example, merge it to `master`) or make `m3-redesign` the default branch. The workflow itself checks out `m3-redesign` for the merge.
 
