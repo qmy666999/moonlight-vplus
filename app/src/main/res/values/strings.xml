@@ -17,6 +17,11 @@
     <string name="pcview_menu_header_offline">Offline</string>
     <string name="pcview_menu_header_unknown">Refreshing</string>
     <string name="pcview_menu_app_list">View All Apps</string>
+    <string name="pcview_m3_title">Moonlight V+</string>
+    <string name="pcview_m3_subtitle">Choose a PC to start streaming</string>
+    <string name="pcview_cd_settings">Stream settings</string>
+    <string name="pcview_cd_about">About Moonlight</string>
+    <string name="pcview_cd_easytier">Network control</string>
 
     <!-- Widget strings -->
     <string name="widget_name">Game List</string>
@@ -134,7 +139,8 @@
     <string name="ip_hint">IP address of host PC</string>
     <string name="searching_pc">Searching for host PCs on your local network…\n\n
         Ensure Sunshine is running on your host PC or GameStream is enabled in the GeForce Experience SHIELD settings.</string>
-    <string name="searching_pc_title">SEARCHING FOR HOSTS…</string>
+    <string name="searching_pc_title">Looking for PCs</string>
+    <string name="searching_pc_body">Make sure your PC is on and Sunshine or GameStream is running on the same network.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="lost_connection">Lost connection to PC</string>

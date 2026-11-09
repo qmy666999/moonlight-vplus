@@ -1,36 +1,26 @@
-<!-- Portrait orientation only -->
+<!-- Material 3 host shell: tonal app bar, scrolling host grid, scene rail. -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pcViewRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/advance_setting_background"
-    tools:context=".PcView" >
+    android:background="@color/m3_surface"
+    android:clipChildren="false"
+    tools:context=".PcView">
 
     <ImageView
         android:id="@+id/pcBackgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:importantForAccessibility="no" />
 
-    <RelativeLayout
-        android:id="@+id/pcFragmentContainer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_below="@+id/settingsButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:clickable="false"
-        android:focusable="false"
-        >
-
-        <include layout="@layout/view_host_search_state" />
-
-    </RelativeLayout>
+    <View
+        android:id="@+id/pcBackgroundScrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/m3_surface_scrim"
+        android:importantForAccessibility="no" />
 
     <Space
         android:id="@+id/topSafeArea"
@@ -38,122 +28,150 @@
         android:layout_height="@dimen/activity_safearea_top"
         android:layout_alignParentTop="true" />
 
-    <com.limelight.ui.ExpressiveToolbarButton
-        android:id="@+id/settingsButton"
-        android:layout_width="@dimen/pc_toolbar_button_size"
-        android:layout_height="@dimen/pc_toolbar_button_size"
-        android:cropToPadding="false"
-        android:scaleType="fitCenter"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/topSafeArea"
-        android:preferKeepClear="true"
-        style="?android:attr/borderlessButtonStyle"/>
+    <!-- M3 top app bar: leading settings, product identity, then actions. -->
+    <LinearLayout
+        android:id="@+id/pcTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topSafeArea"
+        android:layout_marginStart="@dimen/m3_page_margin"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/m3_page_margin"
+        android:background="@drawable/m3_top_bar_bg"
+        android:elevation="2dp"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/m3_top_bar_height"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-    <com.limelight.ui.ExpressiveToolbarButton
-        android:id="@+id/aboutButton"
-        android:layout_width="@dimen/pc_toolbar_button_size"
-        android:layout_height="@dimen/pc_toolbar_button_size"
-        android:cropToPadding="false"
-        android:scaleType="fitCenter"
-        android:layout_below="@+id/topSafeArea"
-        android:layout_toRightOf="@+id/settingsButton"
-        android:layout_toEndOf="@+id/settingsButton"
-        android:src="@drawable/ic_info"
-        android:preferKeepClear="true"
-        style="?android:attr/borderlessButtonStyle"/>
+        <com.limelight.ui.ExpressiveToolbarButton
+            android:id="@+id/settingsButton"
+            style="@style/Widget.Moonlight.M3.IconButton.Tonal"
+            android:layout_width="@dimen/m3_icon_button_size"
+            android:layout_height="@dimen/m3_icon_button_size"
+            android:contentDescription="@string/pcview_cd_settings"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter" />
 
-    <com.limelight.ui.ExpressiveToolbarButton
-        android:id="@+id/easyTierControlButton"
-        android:layout_width="@dimen/pc_toolbar_button_size"
-        android:layout_height="@dimen/pc_toolbar_button_size"
-        android:cropToPadding="false"
-        android:scaleType="fitCenter"
-        android:layout_below="@+id/topSafeArea"
-        android:layout_toRightOf="@+id/aboutButton"
-        android:layout_toEndOf="@+id/aboutButton"
-        android:src="@drawable/ic_network_control"
-        style="?android:attr/borderlessButtonStyle"/>
-    
-    <com.limelight.ui.ExpressiveToolbarButton
-        android:id="@+id/pcToolbarMenuButton"
-        android:layout_width="@dimen/pc_toolbar_button_size"
-        android:layout_height="@dimen/pc_toolbar_button_size"
-        android:cropToPadding="false"
-        android:scaleType="fitCenter"
-        android:layout_below="@+id/topSafeArea"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:contentDescription="@string/pcview_toolbar_menu"
-        android:src="@drawable/ic_more_vert"
-        android:tint="@color/ui_shell_text_primary"
-        android:preferKeepClear="true"
-        style="?android:attr/borderlessButtonStyle"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    <!-- 场景预设按钮组 -->
+            <TextView
+                android:id="@+id/pcTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/pcview_m3_title"
+                android:textAppearance="@style/TextAppearance.Moonlight.M3.Brand"
+                android:textColor="@color/m3_on_surface" />
+
+            <TextView
+                android:id="@+id/pcSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/pcview_m3_subtitle"
+                android:textAppearance="@style/TextAppearance.Moonlight.M3.BodySmall"
+                android:textColor="@color/m3_on_surface_variant" />
+        </LinearLayout>
+
+        <com.limelight.ui.ExpressiveToolbarButton
+            android:id="@+id/aboutButton"
+            style="@style/Widget.Moonlight.M3.IconButton"
+            android:layout_width="@dimen/m3_icon_button_size"
+            android:layout_height="@dimen/m3_icon_button_size"
+            android:contentDescription="@string/pcview_cd_about"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_info" />
+
+        <com.limelight.ui.ExpressiveToolbarButton
+            android:id="@+id/easyTierControlButton"
+            style="@style/Widget.Moonlight.M3.IconButton"
+            android:layout_width="@dimen/m3_icon_button_size"
+            android:layout_height="@dimen/m3_icon_button_size"
+            android:contentDescription="@string/pcview_cd_easytier"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_network_control" />
+
+        <com.limelight.ui.ExpressiveToolbarButton
+            android:id="@+id/pcToolbarMenuButton"
+            style="@style/Widget.Moonlight.M3.IconButton"
+            android:layout_width="@dimen/m3_icon_button_size"
+            android:layout_height="@dimen/m3_icon_button_size"
+            android:contentDescription="@string/pcview_toolbar_menu"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_more_vert" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/pcFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pcTopBar"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="4dp"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:gravity="center">
+
+        <include layout="@layout/view_host_search_state" />
+
+    </RelativeLayout>
+
+    <!-- Scene presets are secondary actions, grouped in one tonal surface. -->
     <LinearLayout
         android:id="@+id/scenePresetContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="24dp"
-        android:orientation="vertical">
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/m3_page_margin"
+        android:layout_marginBottom="@dimen/m3_page_margin"
+        android:background="@drawable/m3_scene_panel_bg"
+        android:elevation="3dp"
+        android:orientation="vertical"
+        android:padding="4dp">
 
-        <!-- 场景1 -->
         <ImageButton
             android:id="@+id/scene1Btn"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            style="@style/Widget.Moonlight.M3.SceneButton"
             android:contentDescription="@string/layout_pc_view_cd_1daed"
-            android:background="@drawable/btn_pressed_bg"
-            android:src="@drawable/ic_triangle_left"
-            android:tint="#80FFFFFF"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:src="@drawable/ic_triangle_left" />
 
-        <!-- 场景2 -->
         <ImageButton
             android:id="@+id/scene2Btn"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            style="@style/Widget.Moonlight.M3.SceneButton"
             android:contentDescription="@string/layout_pc_view_cd_f2a94"
-            android:background="@drawable/btn_pressed_bg"
-            android:src="@drawable/ic_triangle_left"
-            android:tint="#80FFFFFF"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:src="@drawable/ic_triangle_left" />
 
-        <!-- 场景3 -->
         <ImageButton
             android:id="@+id/scene3Btn"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            style="@style/Widget.Moonlight.M3.SceneButton"
             android:contentDescription="@string/layout_pc_view_cd_0a468"
-            android:background="@drawable/btn_pressed_bg"
-            android:src="@drawable/ic_triangle_left"
-            android:tint="#80FFFFFF"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:src="@drawable/ic_triangle_left" />
 
-        <!-- 场景4 -->
         <ImageButton
             android:id="@+id/scene4Btn"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            style="@style/Widget.Moonlight.M3.SceneButton"
             android:contentDescription="@string/layout_pc_view_cd_94f3b"
-            android:background="@drawable/btn_pressed_bg"
-            android:src="@drawable/ic_triangle_left"
-            android:tint="#80FFFFFF"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:src="@drawable/ic_triangle_left" />
 
-        <!-- 场景5 -->
         <ImageButton
             android:id="@+id/scene5Btn"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            style="@style/Widget.Moonlight.M3.SceneButton"
             android:contentDescription="@string/layout_pc_view_cd_4b18b"
-            android:background="@drawable/btn_pressed_bg"
-            android:src="@drawable/ic_triangle_left"
-            android:tint="#80FFFFFF"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:src="@drawable/ic_triangle_left" />
     </LinearLayout>
 
 </RelativeLayout>

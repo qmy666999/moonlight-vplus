@@ -1,0 +1,75 @@
+name: M3 upstream sync
+
+# Keeps the Material 3 layer current without turning the redesign into a
+# permanent fork. A clean merge becomes a reviewable pull request; a conflict
+# fails the job so a human can resolve it with the notes in
+# docs/M3_DESIGN_SYSTEM.md.
+#
+# GitHub registers scheduled workflows from the default branch only. Put this
+# file on the default branch once, or make m3-redesign the default branch; the
+# checkout step below still targets m3-redesign.
+
+on:
+  schedule:
+    # Daily at 03:17 UTC (11:17 Asia/Shanghai), outside the release window.
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+    inputs:
+      base_branch:
+        description: "Branch that contains the Material 3 work"
+        required: false
+        default: "m3-redesign"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: m3-upstream-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      BASE_BRANCH: ${{ github.event.inputs.base_branch || 'm3-redesign' }}
+    steps:
+      - name: Check out the M3 branch with full history
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ env.BASE_BRANCH }}
+          fetch-depth: 0
+
+      - name: Configure git identity
+        run: |
+          git config user.name "m3-upstream-bot"
+          git config user.email "m3-upstream-bot@users.noreply.github.com"
+
+      - name: Merge upstream master
+        run: |
+          chmod +x scripts/sync-upstream.sh
+          BASE_BRANCH="$BASE_BRANCH" \
+          SYNC_BRANCH="automation/upstream-sync" \
+          UPSTREAM_BRANCH="master" \
+          PUSH=0 \
+          ./scripts/sync-upstream.sh
+
+      - name: Open or update the sync pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/upstream-sync
+          base: ${{ env.BASE_BRANCH }}
+          title: "chore(m3): sync upstream Moonlight V+"
+          commit-message: "chore(m3): sync upstream Moonlight V+"
+          delete-branch: true
+          body: |
+            Automated merge of `qiin2333/moonlight-vplus@master` into the Material 3 branch.
+
+            Review focus:
+            - [ ] Host screen / app launcher layout still uses M3 roles
+            - [ ] `pwsh -File scripts/check-m3-tokens.ps1` passes
+            - [ ] Light, dark, and wallpaper-follow were checked
+            - [ ] No new private `darkColorScheme()` or hard-coded page palette
+
+            Conflict hotspots are documented in `docs/M3_DESIGN_SYSTEM.md`.

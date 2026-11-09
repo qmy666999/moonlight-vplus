@@ -18,4 +18,24 @@
     <attr name="appAccent" format="color" />
     <attr name="appAccentSoft" format="color" />
     <attr name="appAccentFocus" format="color" />
+
+    <!--
+        Material 3 semantic roles for the View system. Compose consumes the same
+        values through MoonlightTheme.kt. Primary roles stay tied to appAccent
+        so the wallpaper-derived palette remains fully dynamic.
+    -->
+    <attr name="m3ColorPrimary" format="color" />
+    <attr name="m3ColorOnPrimary" format="color" />
+    <attr name="m3ColorPrimaryContainer" format="color" />
+    <attr name="m3ColorOnPrimaryContainer" format="color" />
+    <attr name="m3ColorSecondary" format="color" />
+    <attr name="m3ColorSecondaryContainer" format="color" />
+    <attr name="m3ColorSurface" format="color" />
+    <attr name="m3ColorOnSurface" format="color" />
+    <attr name="m3ColorOnSurfaceVariant" format="color" />
+    <attr name="m3ColorOutline" format="color" />
+    <attr name="m3ColorOutlineVariant" format="color" />
+    <attr name="m3ColorSurfaceContainerLow" format="color" />
+    <attr name="m3ColorSurfaceContainer" format="color" />
+    <attr name="m3ColorSurfaceContainerHigh" format="color" />
 </resources>

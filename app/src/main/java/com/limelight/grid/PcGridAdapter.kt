@@ -400,11 +400,11 @@ class PcGridAdapter(
         when {
             isOffline -> {
                 overlayView.setImageResource(R.drawable.ic_pc_offline)
-                overlayView.alpha = 0.35f
+                overlayView.alpha = 0.55f
                 overlayView.visibility = View.VISIBLE
-                overlayView.setPadding(0, 0, 10, 12)
-                overlayView.scaleX = 1.4f
-                overlayView.scaleY = 1.4f
+                overlayView.setPadding(0, 0, 0, 0)
+                overlayView.scaleX = 1.0f
+                overlayView.scaleY = 1.0f
             }
             isOnline && details.pairState == PairingManager.PairState.NOT_PAIRED -> {
                 overlayView.setImageResource(R.drawable.ic_lock)

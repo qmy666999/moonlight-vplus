@@ -18,6 +18,7 @@ import androidx.core.content.pm.PackageInfoCompat
 import androidx.core.os.ConfigurationCompat
 import androidx.core.view.doOnLayout
 import com.limelight.R
+import com.limelight.ui.theme.MoonlightTheme
 import com.limelight.handbook.HandbookLauncher
 import com.limelight.ui.AboutDialogContent
 import com.limelight.ui.EcosystemDialogContent
@@ -224,7 +225,7 @@ object AboutDialogLauncher {
             isFocusable = true
             isFocusableInTouchMode = true
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnDetachedFromWindow)
-            setContent { content(dialog) }
+            setContent { MoonlightTheme { content(dialog) } }
         }
         dialog.setContentView(
             composeView,

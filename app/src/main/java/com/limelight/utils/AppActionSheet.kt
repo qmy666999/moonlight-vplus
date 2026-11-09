@@ -20,7 +20,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -47,8 +46,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -88,6 +85,7 @@ import com.limelight.ui.UiDismissKeyHandler
 import com.limelight.ui.expressivePressFeedback
 import com.limelight.ui.theme.AppShapes
 import com.limelight.ui.theme.AppOverlayWidths
+import com.limelight.ui.theme.MoonlightTheme
 import kotlinx.coroutines.flow.first
 import kotlin.math.roundToInt
 
@@ -397,26 +395,8 @@ object AppActionSheet {
 
     @Composable
     internal fun AppActionSheetTheme(content: @Composable () -> Unit) {
-        val accent = appAccentColor()
         val surface = colorResource(R.color.app_dialog_surface)
-        val primary = colorResource(R.color.app_dialog_text_primary)
-        val secondary = colorResource(R.color.app_dialog_text_secondary)
-        val scheme = if (isSystemInDarkTheme()) {
-            darkColorScheme(
-                primary = accent,
-                surface = surface,
-                onSurface = primary,
-                onSurfaceVariant = secondary
-            )
-        } else {
-            lightColorScheme(
-                primary = accent,
-                surface = surface,
-                onSurface = primary,
-                onSurfaceVariant = secondary
-            )
-        }
-        MaterialTheme(colorScheme = scheme, content = content)
+        MoonlightTheme(surfaceOverride = surface, content = content)
     }
 
     @Composable

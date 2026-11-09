@@ -201,6 +201,8 @@ object AppTheme {
         // Reset first: removing a background or disabling its accent must not retain the old overlay.
         theme.applyStyle(R.style.AppAccentBrand, true)
         if (bucket in BG_OVERLAY_STYLES.indices) theme.applyStyle(BG_OVERLAY_STYLES[bucket], true)
+        // Material 3 roles are resolved last so they always see the active bucket.
+        theme.applyStyle(R.style.MoonlightM3Overlay, true)
     }
 
     fun applyStyle(context: Context, style: Int) {

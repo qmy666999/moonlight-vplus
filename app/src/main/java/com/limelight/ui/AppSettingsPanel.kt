@@ -36,8 +36,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -81,9 +79,9 @@ import androidx.compose.ui.semantics.semantics
 import com.limelight.R
 import com.limelight.ui.theme.AppCornerRadii
 import com.limelight.ui.theme.AppShapes
+import com.limelight.ui.theme.MoonlightTheme
 import com.limelight.utils.AppBackgroundMode
 import kotlin.math.min
-import com.limelight.utils.appAccentColor
 
 data class AppDisplayOption(
     val id: Int,
@@ -227,27 +225,6 @@ fun AppSettingsPanel(
     val listState = rememberLazyListState()
     val isDarkTheme = isSystemInDarkTheme()
     val panelSurface = colorResource(R.color.appview_quick_menu_background)
-    val colorScheme = if (isDarkTheme) {
-        darkColorScheme(
-            primary = appAccentColor(),
-            onPrimary = colorResource(R.color.ui_shell_text_primary),
-            surface = panelSurface,
-            surfaceVariant = colorResource(R.color.ui_shell_surface_pressed),
-            onSurface = colorResource(R.color.ui_shell_text_primary),
-            onSurfaceVariant = colorResource(R.color.ui_shell_text_secondary),
-            outline = colorResource(R.color.ui_shell_outline_strong)
-        )
-    } else {
-        lightColorScheme(
-            primary = appAccentColor(),
-            onPrimary = colorResource(R.color.ui_shell_text_primary),
-            surface = panelSurface,
-            surfaceVariant = colorResource(R.color.ui_shell_surface_pressed),
-            onSurface = colorResource(R.color.ui_shell_text_primary),
-            onSurfaceVariant = colorResource(R.color.ui_shell_text_secondary),
-            outline = colorResource(R.color.ui_shell_outline)
-        )
-    }
 
     LaunchedEffect(isOpen) {
         if (isOpen) {
@@ -271,9 +248,7 @@ fun AppSettingsPanel(
         }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme
-    ) {
+    MoonlightTheme(surfaceOverride = panelSurface) {
         Surface(
             modifier = Modifier
                 .width(panelWidth.dp)

@@ -28,6 +28,8 @@
 
 Moonlight V+ extends [moonlight-android](https://github.com/moonlight-stream/moonlight-android) with a wide range of enhancements while maintaining full compatibility with the upstream streaming protocol.
 
+The UI has been rebuilt on Material 3: the host screen, host cards, app launcher, settings, and dialogs share one semantic color, type, shape, and motion system, while the primary color still follows the home wallpaper. See [docs/M3_DESIGN_SYSTEM_EN.md](docs/M3_DESIGN_SYSTEM_EN.md) for the design system and upstream sync workflow.
+
 | Category | Feature | Description | Since |
 |----------|---------|-------------|:-----:|
 | **Streaming** | Ultra-high refresh rate | Unlock 144 / 165 Hz, up to 800 Mbps bitrate | |

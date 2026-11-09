@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    M3 shape, spacing, and component styles for the View system.
+    Corner radii follow the 4/8/12/16/28 dp M3 shape scale.
+-->
+<resources>
+    <dimen name="m3_shape_extra_small">4dp</dimen>
+    <dimen name="m3_shape_small">8dp</dimen>
+    <dimen name="m3_shape_medium">12dp</dimen>
+    <dimen name="m3_shape_large">16dp</dimen>
+    <dimen name="m3_shape_extra_large">28dp</dimen>
+
+    <dimen name="m3_page_margin">16dp</dimen>
+    <dimen name="m3_card_gap">12dp</dimen>
+    <dimen name="m3_icon_button_size">48dp</dimen>
+    <dimen name="m3_top_bar_height">72dp</dimen>
+    <dimen name="m3_host_card_height">104dp</dimen>
+    <dimen name="m3_host_icon_size">64dp</dimen>
+    <dimen name="m3_host_icon_inner_size">52dp</dimen>
+    <dimen name="m3_state_badge_size">22dp</dimen>
+
+    <!-- Tonal round icon button used on the host screen and settings header. -->
+    <style name="Widget.Moonlight.M3.IconButton" parent="android:Widget.ImageButton">
+        <item name="android:layout_width">@dimen/m3_icon_button_size</item>
+        <item name="android:layout_height">@dimen/m3_icon_button_size</item>
+        <item name="android:background">@drawable/m3_icon_button_bg</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:minWidth">@dimen/m3_icon_button_size</item>
+        <item name="android:minHeight">@dimen/m3_icon_button_size</item>
+        <item name="android:tint">@color/m3_on_surface_variant</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="Widget.Moonlight.M3.IconButton.Tonal" parent="Widget.Moonlight.M3.IconButton">
+        <item name="android:background">@drawable/m3_icon_button_tonal_bg</item>
+        <item name="android:tint">?attr/appAccent</item>
+    </style>
+
+    <style name="Widget.Moonlight.M3.IconButton.Media" parent="Widget.Moonlight.M3.IconButton">
+        <item name="android:background">@drawable/m3_badge_bg</item>
+        <item name="android:tint">@color/m3_on_media</item>
+    </style>
+
+    <style name="Widget.Moonlight.M3.Button" parent="android:Widget.Button">
+        <item name="android:background">@drawable/m3_button_bg</item>
+        <item name="android:textAppearance">@style/TextAppearance.Moonlight.M3.LabelLarge</item>
+        <item name="android:textColor">@color/m3_on_primary</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="Widget.Moonlight.M3.Button.Tonal" parent="Widget.Moonlight.M3.Button">
+        <item name="android:background">@drawable/m3_button_tonal_bg</item>
+        <item name="android:textColor">?attr/appAccent</item>
+    </style>
+
+    <style name="Widget.Moonlight.M3.SceneButton" parent="android:Widget.ImageButton">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/m3_scene_button_bg</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:tint">@color/m3_on_surface_variant</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="Widget.Moonlight.M3.SearchField" parent="">
+        <item name="android:background">@drawable/m3_search_field_bg</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Moonlight.M3.BodyLarge</item>
+        <item name="android:textColor">@color/m3_on_surface</item>
+        <item name="android:textColorHint">@color/m3_on_surface_variant</item>
+    </style>
+
+    <style name="Widget.Moonlight.M3.Card" parent="">
+        <item name="android:background">@drawable/m3_card_bg</item>
+        <item name="android:clipToOutline">true</item>
+    </style>
+
+    <style name="Widget.Moonlight.M3.Card.Selectable" parent="Widget.Moonlight.M3.Card">
+        <item name="android:background">@drawable/m3_card_selector</item>
+        <item name="android:stateListAnimator">@animator/expressive_item_state</item>
+    </style>
+
+    <style name="Widget.Moonlight.M3.SectionTitle" parent="">
+        <item name="android:textAppearance">@style/TextAppearance.Moonlight.M3.TitleSmall</item>
+        <item name="android:textColor">@color/m3_on_surface_variant</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Widget.Moonlight.M3.Body" parent="">
+        <item name="android:textAppearance">@style/TextAppearance.Moonlight.M3.BodyMedium</item>
+        <item name="android:textColor">@color/m3_on_surface_variant</item>
+    </style>
+
+    <!--
+        Runtime overlay applied after the wallpaper accent. Keeping this separate
+        from the static palette means every accent bucket gets M3 semantics
+        without duplicating a dozen role entries in you_bg_accent.xml.
+    -->
+    <style name="MoonlightM3Overlay" parent="">
+        <item name="m3ColorPrimary">?attr/appAccent</item>
+        <item name="m3ColorPrimaryContainer">?attr/appAccentSoft</item>
+        <item name="m3ColorOnPrimary">@color/m3_on_primary</item>
+        <item name="m3ColorOnPrimaryContainer">@color/m3_on_primary_container</item>
+        <item name="m3ColorSecondary">@color/m3_secondary</item>
+        <item name="m3ColorSecondaryContainer">@color/m3_secondary_container</item>
+        <item name="m3ColorSurface">@color/m3_surface</item>
+        <item name="m3ColorOnSurface">@color/m3_on_surface</item>
+        <item name="m3ColorOnSurfaceVariant">@color/m3_on_surface_variant</item>
+        <item name="m3ColorOutline">@color/m3_outline</item>
+        <item name="m3ColorOutlineVariant">@color/m3_outline_variant</item>
+        <item name="m3ColorSurfaceContainerLow">@color/m3_surface_container_low</item>
+        <item name="m3ColorSurfaceContainer">@color/m3_surface_container</item>
+        <item name="m3ColorSurfaceContainerHigh">@color/m3_surface_container_high</item>
+    </style>
+</resources>

@@ -28,6 +28,8 @@
 
 Moonlight V+ 在 [moonlight-android](https://github.com/moonlight-stream/moonlight-android) 的基础上增加了大量实用功能，同时保持与原版串流协议的完全兼容。
 
+界面已重构为 Material 3：首页、主机卡片、应用启动器、设置和通用对话框共享一套语义色彩、排版、形状与动效，主色继续跟随首页壁纸。设计系统与上游同步流程见 [docs/M3_DESIGN_SYSTEM.md](docs/M3_DESIGN_SYSTEM.md)。
+
 | 类别 | 功能 | 说明 | 起始版本 |
 |------|------|------|:--------:|
 | **串流** | 超高刷新率 | 解锁 144 / 165 Hz，最高 800 Mbps 码率 | |

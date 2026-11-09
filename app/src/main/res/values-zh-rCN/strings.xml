@@ -17,6 +17,11 @@
     <string name="help_loading_msg"> 正在加载帮助页面…… </string>
     <!-- PC view menu entries -->
     <string name="pcview_menu_app_list"> 浏览游戏列表 </string>
+    <string name="pcview_m3_title">Moonlight V+</string>
+    <string name="pcview_m3_subtitle">选择一台电脑开始串流</string>
+    <string name="pcview_cd_settings">串流设置</string>
+    <string name="pcview_cd_about">关于 Moonlight</string>
+    <string name="pcview_cd_easytier">网络控制</string>
     <string name="pcview_menu_pair_pc"> 和电脑配对 </string>
     <string name="pcview_menu_unpair_pc"> 取消配对 </string>
     <string name="pcview_menu_send_wol"> 发送 Wake-On-LAN 请求 </string>
@@ -90,7 +95,8 @@
     <string name="searching_pc">在你的本地网络中搜索串流主机PC...
 \n
 \n 确保Sunshine在主机上运行，或在GeForce Experience SHIELD设置中启用GameStream。</string>
-    <string name="searching_pc_title">正在搜索主机…</string>
+    <string name="searching_pc_title">正在寻找电脑</string>
+    <string name="searching_pc_body">请确认电脑已开机，且 Sunshine 或 GameStream 与手机处于同一网络。</string>
     <string name="yes">确定</string>
     <string name="no">取消</string>
     <string name="lost_connection"> 与电脑失去连接 </string>

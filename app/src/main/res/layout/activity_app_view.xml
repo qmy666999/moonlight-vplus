@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/advance_setting_background"
+    android:background="@color/m3_surface"
     android:clipChildren="false"
     android:clipToPadding="false"
     tools:context=".AppView">
@@ -25,6 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitCenter" />
+
+        <View
+            android:id="@+id/appBackgroundScrim"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/m3_surface_scrim"
+            android:importantForAccessibility="no" />
 
     </FrameLayout>
 
@@ -90,10 +97,10 @@
                 android:layout_gravity="end"
                 android:layout_marginTop="4dp"
                 android:gravity="end"
-                android:paddingStart="8dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="4dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
                 android:preferKeepClear="true"
                 android:clickable="true"
                 android:focusable="true"
@@ -107,16 +114,16 @@
                 android:gravity="end"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:textColor="@color/control_highlight_color"
+                android:textColor="@color/m3_on_surface_variant"
                 android:textSize="13sp"
                 android:fontFamily="sans-serif-medium"
                 android:maxLines="@integer/appview_target_reminder_max_lines"
                 android:ellipsize="end"
                 android:lineSpacingExtra="1dp"
-                android:shadowColor="@color/appview_text_shadow"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
+                android:shadowColor="#00000000"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="0"
                 android:focusable="false"
                 android:clickable="false"
                 android:importantForAccessibility="yes"
@@ -150,30 +157,25 @@
             <com.limelight.utils.AppSwitchView
                 style="@style/AppSwitchWidget"
                 android:id="@+id/useLastSettingsSwitch"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:focusable="true"
                 android:text="@string/app_last_settings_use_checkbox"
-                android:textColor="@color/appview_text_secondary"
-                android:textSize="12sp"
-                android:fontFamily="sans-serif-light"
+                android:textColor="@color/m3_on_surface"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
                 android:checked="false" />
 
             <TextView
                 android:id="@+id/lastSettingsText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:textColor="@color/appview_text_secondary"
-                android:shadowColor="@color/appview_text_shadow"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2"
-                android:fontFamily="sans-serif-light"
+                android:layout_marginTop="6dp"
+                android:textAppearance="@style/TextAppearance.Moonlight.M3.BodySmall"
+                android:textColor="@color/m3_on_surface_variant"
                 android:background="@drawable/settings_info_background"
-                android:padding="@dimen/appview_edge_margin"
+                android:padding="12dp"
                 android:maxLines="3"
                 android:ellipsize="end"
-                android:lineSpacingExtra="2dp"
                 android:text="@string/app_last_settings_title" />
 
         </LinearLayout>

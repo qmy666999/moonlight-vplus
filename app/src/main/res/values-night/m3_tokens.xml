@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Moonlight V+ Material 3 color roles (dark). Keep the role names in sync
+     with values/m3_tokens.xml; scripts/check-m3-tokens.ps1 verifies this. -->
+<resources>
+    <color name="m3_surface">#181114</color>
+    <color name="m3_surface_dim">#181114</color>
+    <color name="m3_surface_bright">#3F3739</color>
+    <color name="m3_surface_container_lowest">#120C0E</color>
+    <color name="m3_surface_container_low">#1F181A</color>
+    <color name="m3_surface_container">#241D1F</color>
+    <color name="m3_surface_container_high">#2F2729</color>
+    <color name="m3_surface_container_highest">#3A3234</color>
+    <color name="m3_on_surface">#EDE0E2</color>
+    <color name="m3_on_surface_variant">#D6C2C6</color>
+    <color name="m3_outline">#9E8C90</color>
+    <color name="m3_outline_variant">#524346</color>
+    <color name="m3_inverse_surface">#EDE0E2</color>
+    <color name="m3_inverse_on_surface">#362F31</color>
+
+    <color name="m3_primary">#FFB1C8</color>
+    <color name="m3_on_primary">#3A0018</color>
+    <color name="m3_primary_container">#5E1133</color>
+    <color name="m3_on_primary_container">#FFD9E2</color>
+    <color name="m3_secondary">#E3BDC6</color>
+    <color name="m3_on_secondary">#422931</color>
+    <color name="m3_secondary_container">#5A3F47</color>
+    <color name="m3_on_secondary_container">#FFD9E2</color>
+    <color name="m3_tertiary">#EFBD94</color>
+    <color name="m3_on_tertiary">#49290B</color>
+
+    <color name="m3_error">#FFB4AB</color>
+    <color name="m3_on_error">#690005</color>
+    <color name="m3_error_container">#93000A</color>
+    <color name="m3_on_error_container">#FFDAD6</color>
+
+    <color name="m3_success">#9CD49F</color>
+    <color name="m3_warning">#FFB86B</color>
+
+    <color name="m3_scrim">#99000000</color>
+    <color name="m3_surface_scrim">#D9181114</color>
+    <color name="m3_app_bar_surface">#E61F181A</color>
+    <color name="m3_media_scrim_start">#00000000</color>
+    <color name="m3_media_scrim_end">#CC000000</color>
+    <color name="m3_on_media">#FFFFFFFF</color>
+    <color name="m3_badge_scrim">#66000000</color>
+</resources>

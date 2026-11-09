@@ -26,8 +26,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -37,8 +35,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -46,9 +42,9 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import com.limelight.R
 import com.limelight.ui.ThemedComponentActivity
+import com.limelight.ui.theme.MoonlightTheme
 import com.limelight.utils.BrowserOnlyLauncher
 import com.limelight.utils.UiHelper
-import com.limelight.utils.appAccentColor
 import org.json.JSONArray
 import java.util.Locale
 
@@ -83,24 +79,14 @@ class OpenSourceNoticesActivity : ThemedComponentActivity() {
         UiHelper.setLocale(this)
         setContent {
             val dark = isSystemInDarkTheme()
-            val base = if (dark) darkColorScheme() else lightColorScheme()
-            val colors = base.copy(
-                primary = appAccentColor(),
-                onPrimary = Color.White,
-                background = colorResource(R.color.game_menu_dialog_background),
-                onBackground = colorResource(R.color.game_menu_text_primary),
-                surface = colorResource(R.color.game_menu_card_background),
-                onSurface = colorResource(R.color.game_menu_text_primary),
-                onSurfaceVariant = colorResource(R.color.game_menu_text_secondary),
-                outline = colorResource(R.color.game_menu_dialog_border)
-            )
-            SideEffect {
-                WindowCompat.getInsetsController(window, window.decorView).apply {
-                    isAppearanceLightStatusBars = !dark
-                    isAppearanceLightNavigationBars = !dark
+            MoonlightTheme(darkTheme = dark) {
+                val colors = MaterialTheme.colorScheme
+                SideEffect {
+                    WindowCompat.getInsetsController(window, window.decorView).apply {
+                        isAppearanceLightStatusBars = !dark
+                        isAppearanceLightNavigationBars = !dark
+                    }
                 }
-            }
-            MaterialTheme(colorScheme = colors) {
                 var selectedId by rememberSaveable { mutableStateOf<String?>(null) }
                 var showLicense by rememberSaveable { mutableStateOf(false) }
                 val selected = notices.firstOrNull { it.id == selectedId }

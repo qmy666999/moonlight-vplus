@@ -21,25 +21,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import com.limelight.ui.ThemedAppCompatActivity
+import com.limelight.ui.theme.MoonlightTheme
 import com.limelight.R
 import com.limelight.binding.input.StickCenterStore
 import com.limelight.utils.UiHelper
 import java.util.Locale
-import com.limelight.utils.appAccentColor
 
 /** Captures raw Android joystick axes, before deadzone and host Y inversion. */
 class StickCalibrationActivity : ThemedAppCompatActivity() {
@@ -59,25 +55,15 @@ class StickCalibrationActivity : ThemedAppCompatActivity() {
         setContent {
             // AppCompat applies the app override to this configuration, including on pre-31 devices.
             val darkTheme = isSystemInDarkTheme()
-            val baseColors = if (darkTheme) darkColorScheme() else lightColorScheme()
-            val colors = baseColors.copy(
-                primary = appAccentColor(),
-                onPrimary = Color.White,
-                background = colorResource(R.color.game_menu_dialog_background),
-                onBackground = colorResource(R.color.game_menu_text_primary),
-                surface = colorResource(R.color.game_menu_card_background),
-                onSurface = colorResource(R.color.game_menu_text_primary),
-                onSurfaceVariant = colorResource(R.color.game_menu_text_secondary),
-                outline = colorResource(R.color.game_menu_dialog_border)
-            )
-            SideEffect {
-                WindowCompat.getInsetsController(window, window.decorView).apply {
-                    show(WindowInsetsCompat.Type.systemBars())
-                    isAppearanceLightStatusBars = !darkTheme
-                    isAppearanceLightNavigationBars = !darkTheme
+            MoonlightTheme(darkTheme = darkTheme) {
+                val colors = MaterialTheme.colorScheme
+                SideEffect {
+                    WindowCompat.getInsetsController(window, window.decorView).apply {
+                        show(WindowInsetsCompat.Type.systemBars())
+                        isAppearanceLightStatusBars = !darkTheme
+                        isAppearanceLightNavigationBars = !darkTheme
+                    }
                 }
-            }
-            MaterialTheme(colorScheme = colors) {
                 Surface(modifier = Modifier.fillMaxSize(), color = colors.background,
                     contentColor = colors.onBackground) {
                     Column(

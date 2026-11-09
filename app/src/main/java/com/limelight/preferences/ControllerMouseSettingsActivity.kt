@@ -24,8 +24,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -35,8 +33,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -49,8 +45,8 @@ import androidx.preference.PreferenceManager
 import com.limelight.utils.AppSlider
 import com.limelight.R
 import com.limelight.ui.ThemedAppCompatActivity
+import com.limelight.ui.theme.MoonlightTheme
 import com.limelight.utils.UiHelper
-import com.limelight.utils.appAccentColor
 import kotlin.math.roundToInt
 
 class ControllerMouseSettingsActivity : ThemedAppCompatActivity() {
@@ -62,35 +58,26 @@ class ControllerMouseSettingsActivity : ThemedAppCompatActivity() {
 
         setContent {
             val darkTheme = isSystemInDarkTheme()
-            val baseColors = if (darkTheme) darkColorScheme() else lightColorScheme()
-            val colors = baseColors.copy(
-                primary = appAccentColor(),
-                onPrimary = Color.White,
-                background = colorResource(R.color.game_menu_dialog_background),
-                onBackground = colorResource(R.color.game_menu_text_primary),
-                surface = colorResource(R.color.game_menu_card_background),
-                onSurface = colorResource(R.color.game_menu_text_primary),
-                onSurfaceVariant = colorResource(R.color.game_menu_text_secondary),
-            )
-            var speed by remember {
-                mutableIntStateOf(prefs.getInt(PreferenceConfiguration.CONTROLLER_MOUSE_SPEED_PREF_STRING, 100).coerceIn(50, 200))
-            }
-            var scrollStick by remember {
-                mutableStateOf(prefs.getString("analog_scrolling", "right")?.takeIf { it in setOf("right", "left", "none") } ?: "right")
-            }
-            var dpadMode by remember {
-                mutableStateOf(if (prefs.getString(PreferenceConfiguration.CONTROLLER_MOUSE_DPAD_PREF_STRING, "scroll") == "arrows")
-                    "arrows" else "scroll")
-            }
-
-            SideEffect {
-                WindowCompat.getInsetsController(window, window.decorView).apply {
-                    show(WindowInsetsCompat.Type.systemBars())
-                    isAppearanceLightStatusBars = !darkTheme
-                    isAppearanceLightNavigationBars = !darkTheme
+            MoonlightTheme(darkTheme = darkTheme) {
+                val colors = MaterialTheme.colorScheme
+                var speed by remember {
+                    mutableIntStateOf(prefs.getInt(PreferenceConfiguration.CONTROLLER_MOUSE_SPEED_PREF_STRING, 100).coerceIn(50, 200))
                 }
-            }
-            MaterialTheme(colorScheme = colors) {
+                var scrollStick by remember {
+                    mutableStateOf(prefs.getString("analog_scrolling", "right")?.takeIf { it in setOf("right", "left", "none") } ?: "right")
+                }
+                var dpadMode by remember {
+                    mutableStateOf(if (prefs.getString(PreferenceConfiguration.CONTROLLER_MOUSE_DPAD_PREF_STRING, "scroll") == "arrows")
+                        "arrows" else "scroll")
+                }
+
+                SideEffect {
+                    WindowCompat.getInsetsController(window, window.decorView).apply {
+                        show(WindowInsetsCompat.Type.systemBars())
+                        isAppearanceLightStatusBars = !darkTheme
+                        isAppearanceLightNavigationBars = !darkTheme
+                    }
+                }
                 Surface(modifier = Modifier.fillMaxSize(), color = colors.background) {
                     Box(modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)) {
                         Column(

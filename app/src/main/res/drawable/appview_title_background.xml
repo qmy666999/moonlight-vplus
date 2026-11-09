@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:enterFadeDuration="120"
-    android:exitFadeDuration="120">
+<!-- M3 title pill for the app launcher. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="#1FFFFFFF" />
-            <corners android:radius="8dp" />
-            <stroke android:width="1dp" android:color="#99FFFFFF" />
+            <solid android:color="@color/m3_surface_container_high" />
+            <corners android:radius="20dp" />
         </shape>
     </item>
     <item android:state_focused="true">
         <shape android:shape="rectangle">
-            <solid android:color="#12FFFFFF" />
-            <corners android:radius="8dp" />
-            <stroke android:width="1dp" android:color="#73FFFFFF" />
+            <solid android:color="@color/m3_surface_container" />
+            <corners android:radius="20dp" />
+            <stroke
+                android:width="2dp"
+                android:color="?attr/appAccent" />
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@android:color/transparent" />
-            <corners android:radius="8dp" />
+            <solid android:color="@color/m3_app_bar_surface" />
+            <corners android:radius="20dp" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/m3_outline_variant" />
         </shape>
     </item>
 </selector>

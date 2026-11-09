@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Moonlight V+ Material 3 color roles (light).
+
+    These are *semantic* roles, not raw brand colors. Screens and drawables
+    should reference a role such as m3_surface_container instead of a hex value
+    so that the palette stays consistent and the light/dark mappings stay
+    testable. Primary roles are supplied by ?attr/appAccent at runtime so the
+    existing wallpaper-derived accent engine remains the source of truth.
+-->
+<resources>
+    <color name="m3_surface">#FFF8F8</color>
+    <color name="m3_surface_dim">#E8D6D9</color>
+    <color name="m3_surface_bright">#FFF8F8</color>
+    <color name="m3_surface_container_lowest">#FFFFFFFF</color>
+    <color name="m3_surface_container_low">#FFF0F3</color>
+    <color name="m3_surface_container">#FBE8ED</color>
+    <color name="m3_surface_container_high">#F5E2E7</color>
+    <color name="m3_surface_container_highest">#EFDCE2</color>
+    <color name="m3_on_surface">#201A1C</color>
+    <color name="m3_on_surface_variant">#524346</color>
+    <color name="m3_outline">#857376</color>
+    <color name="m3_outline_variant">#D7C1C6</color>
+    <color name="m3_inverse_surface">#362F31</color>
+    <color name="m3_inverse_on_surface">#FBEDEF</color>
+
+    <!-- Fallbacks for contexts that cannot resolve the dynamic accent attr. -->
+    <color name="m3_primary">#FF6B9D</color>
+    <color name="m3_on_primary">#3A0018</color>
+    <color name="m3_primary_container">#FFD9E2</color>
+    <color name="m3_on_primary_container">#3A0018</color>
+    <color name="m3_secondary">#74565F</color>
+    <color name="m3_on_secondary">#FFFFFFFF</color>
+    <color name="m3_secondary_container">#FFD9E2</color>
+    <color name="m3_on_secondary_container">#2B151C</color>
+    <color name="m3_tertiary">#7C5635</color>
+    <color name="m3_on_tertiary">#FFFFFFFF</color>
+
+    <color name="m3_error">#BA1A1A</color>
+    <color name="m3_on_error">#FFFFFFFF</color>
+    <color name="m3_error_container">#FFDAD6</color>
+    <color name="m3_on_error_container">#410002</color>
+
+    <!-- Extended semantic roles used by streaming/network status. -->
+    <color name="m3_success">#2E6B3A</color>
+    <color name="m3_warning">#8A5100</color>
+
+    <!-- Shell specific tonal surfaces. -->
+    <color name="m3_scrim">#66000000</color>
+    <color name="m3_surface_scrim">#D9FFF8F8</color>
+    <color name="m3_app_bar_surface">#F2FFF0F3</color>
+    <color name="m3_media_scrim_start">#00000000</color>
+    <color name="m3_media_scrim_end">#B3000000</color>
+    <color name="m3_on_media">#FFFFFFFF</color>
+    <color name="m3_badge_scrim">#66000000</color>
+</resources>

@@ -68,6 +68,8 @@ docs/*
 !docs/pyrowave-decoder-design.md
 !docs/pyrowave-vulkan-synchronization-design.md
 !docs/pyrowave-dynamic-hdr.md
+!docs/M3_DESIGN_SYSTEM.md
+!docs/M3_DESIGN_SYSTEM_EN.md
 
 # Kotlin build cache
 .kotlin/
@@ -79,6 +81,9 @@ gradle/gradle-daemon-jvm.properties
 scripts/*
 !scripts/generate_accent_variants.py
 !scripts/test_accent_palette.py
+!scripts/sync-upstream.ps1
+!scripts/sync-upstream.sh
+!scripts/check-m3-tokens.ps1
 
 # Local mock server generated certs/logs
 tools/mock-sunshine/.generated/
