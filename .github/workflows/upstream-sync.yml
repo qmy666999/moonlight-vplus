@@ -54,22 +54,44 @@ jobs:
           PUSH=0 \
           ./scripts/sync-upstream.sh
 
+      - name: Push the sync branch
+        run: |
+          AHEAD=$(git rev-list --count "origin/$BASE_BRANCH..HEAD")
+          if [ "$AHEAD" = "0" ]; then
+            echo "No upstream changes to publish."
+            exit 0
+          fi
+          git push --force-with-lease -u origin automation/upstream-sync
+
       - name: Open or update the sync pull request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: automation/upstream-sync
-          base: ${{ env.BASE_BRANCH }}
-          title: "chore(m3): sync upstream Moonlight V+"
-          commit-message: "chore(m3): sync upstream Moonlight V+"
-          delete-branch: true
-          body: |
-            Automated merge of `qiin2333/moonlight-vplus@master` into the Material 3 branch.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          AHEAD=$(git rev-list --count "origin/$BASE_BRANCH..HEAD")
+          if [ "$AHEAD" = "0" ]; then
+            echo "No pull request needed."
+            exit 0
+          fi
 
-            Review focus:
-            - [ ] Host screen / app launcher layout still uses M3 roles
-            - [ ] `pwsh -File scripts/check-m3-tokens.ps1` passes
-            - [ ] Light, dark, and wallpaper-follow were checked
-            - [ ] No new private `darkColorScheme()` or hard-coded page palette
+          TITLE="chore(m3): sync upstream Moonlight V+"
+          BODY=$(cat <<'EOF'
+          Automated merge of `qiin2333/moonlight-vplus@master` into the Material 3 branch.
 
-            Conflict hotspots are documented in `docs/M3_DESIGN_SYSTEM.md`.
+          Review focus:
+          - [ ] Host screen / app launcher layout still uses M3 roles
+          - [ ] `pwsh -File scripts/check-m3-tokens.ps1` passes
+          - [ ] Light, dark, and wallpaper-follow were checked
+          - [ ] No new private `darkColorScheme()` or hard-coded page palette
+
+          Conflict hotspots are documented in `docs/M3_DESIGN_SYSTEM.md`.
+          EOF
+          )
+
+          PR_NUMBER=$(gh pr list --head automation/upstream-sync --base "$BASE_BRANCH" \
+            --state open --json number --jq '.[0].number')
+          if [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
+            gh pr edit "$PR_NUMBER" --title "$TITLE" --body "$BODY"
+          else
+            gh pr create --base "$BASE_BRANCH" --head automation/upstream-sync \
+              --title "$TITLE" --body "$BODY"
+          fi
