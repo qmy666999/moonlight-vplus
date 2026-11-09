@@ -63,7 +63,8 @@ jobs:
           fi
           git push --force-with-lease -u origin automation/upstream-sync
 
-      - name: Open or update the sync pull request
+      - name: Report pull request
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -88,10 +89,11 @@ jobs:
           )
 
           PR_NUMBER=$(gh pr list --head automation/upstream-sync --base "$BASE_BRANCH" \
-            --state open --json number --jq '.[0].number')
+            --state open --json number --jq '.[0].number' || true)
           if [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ]; then
             gh pr edit "$PR_NUMBER" --title "$TITLE" --body "$BODY"
+            echo "Updated PR #$PR_NUMBER"
           else
-            gh pr create --base "$BASE_BRANCH" --head automation/upstream-sync \
-              --title "$TITLE" --body "$BODY"
+            echo "The sync branch was pushed. Open the pull request here:"
+            echo "https://github.com/${GITHUB_REPOSITORY}/compare/${BASE_BRANCH}...automation/upstream-sync?expand=1"
           fi
